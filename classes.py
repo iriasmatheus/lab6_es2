@@ -3,9 +3,11 @@ class Horario:
         self._horas = horas
         self._minutos = minutos
 
-    def validacao_horario(self):
+    def validaHoras(self):
         if not (self._horas >= 0 and self._horas <= 23):
             raise Exception("Horário inválido")
+    
+    def validaMinutos(self):
         if not (self._minutos >= 0 and self._minutos <= 59):
             raise Exception("Horário inválido")
 
@@ -25,11 +27,9 @@ class Data:
             self.validaMesesCom30Dias()
         elif self._mes == 2:
             if self._ano % 4 == 0:
-                if not (self._dia >= 1 and self._dia <= 29):
-                    raise Exception("Data inválida")
+                self.validaFevereiroEmAnoBissexto()
             else:
-                if not (self._dia >= 1 and self._dia <= 28):
-                    raise Exception("Data inválida")
+                self.validaFevereiroEmAnosComuns()
 
     def validaMesesCom31Dias(self):
         if not (self._dia >= 1 and self._dia <= 31):
@@ -37,6 +37,14 @@ class Data:
 
     def validaMesesCom30Dias(self):
         if not (self._dia >= 1 and self._dia <= 30):
+            raise Exception("Data inválida")
+
+    def validaFevereiroEmAnoBissexto(self):
+        if not (self._dia >= 1 and self._dia <= 29):
+            raise Exception("Data inválida")
+
+    def validaFevereiroEmAnosComuns(self):
+        if not (self._dia >= 1 and self._dia <= 28):
             raise Exception("Data inválida")
 
 class DataEHora:
@@ -49,3 +57,10 @@ class Tarefa:
         self._nome = nome
         self._inicio = inicio
         self._fim = fim
+
+    def validaDatasInicioEFim(self):
+        if self._fim._data._ano < self._inicio._data._ano:
+            raise Exception("Início acontece depois do fim")
+        if self._fim._data._ano == self._inicio._data._ano:
+            if self._fim._data._mes < self._inicio._data._mes:
+                raise Exception("Início acontece depois do fim")
