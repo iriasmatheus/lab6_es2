@@ -52,15 +52,28 @@ class DataEHora:
         self._data = data
         self._horario = horario
 
-class Tarefa:
+class Evento:
     def __init__(self, nome, inicio, fim):
         self._nome = nome
         self._inicio = inicio
         self._fim = fim
 
-    def validaDatasInicioEFim(self):
+    def validaAnosInicioEFim(self):
         if self._fim._data._ano < self._inicio._data._ano:
             raise Exception("Início acontece depois do fim")
-        if self._fim._data._ano == self._inicio._data._ano:
-            if self._fim._data._mes < self._inicio._data._mes:
+
+    def validaMesesInicioEFim(self):
+        if self._fim._data._ano == self._inicio._data._ano and self._fim._data._mes < self._inicio._data._mes:
+                raise Exception("Início acontece depois do fim")
+
+    def validaDiasInicioEFim(self):
+        if self._fim._data._mes == self._inicio._data._mes and self._fim._data._dia < self._inicio._data._dia:
+                raise Exception("Início acontece depois do fim")
+
+    def validaHorasInicioEFim(self):
+        if self._fim._data._dia == self._inicio._data._dia and self._fim._horario._horas < self._inicio._horario._horas:
+                raise Exception("Início acontece depois do fim")
+
+    def validaMinutosInicioEFim(self):
+        if self._fim._horario._horas == self._inicio._horario._horas and self._fim._horario._minutos < self._inicio._horario._minutos:
                 raise Exception("Início acontece depois do fim")
