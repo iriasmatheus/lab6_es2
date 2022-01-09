@@ -35,28 +35,28 @@ class TestesEvento(unittest.TestCase):
         self.hora = Horario(horas = 20, minutos = 15)
         self.inicio = DataEHora(data = self.data1, horario = self.hora)
 
-    def testExcecaoDatasTarefa(self):
+    def testExcecaoAnosInicioEFim(self):
         self.data2 = Data(dia = 31, mes = 12, ano = 2021)
         self.fim = DataEHora(data = self.data2, horario = self.hora)
         self.evento = Evento(nome = 'Evento 1', inicio = self.inicio, fim = self.fim)
         with self.assertRaises(Exception):
             self.evento.validaAnosInicioEFim()
 
-    def testExcecaoDatasTarefa2(self):
+    def testExcecaoMesesInicioEFim(self):
         self.data2 = Data(dia = 31, mes = 1, ano = 2022)
         self.fim = DataEHora(data = self.data2, horario = self.hora)
         self.evento = Evento(nome = 'Evento 2', inicio = self.inicio, fim = self.fim)
         with self.assertRaises(Exception):
             self.evento.validaMesesInicioEFim()
 
-    def testExcecaoDatasTarefa3(self):
+    def testExcecaoDiasInicioEFim(self):
         self.data2 = Data(dia = 3, mes = 2, ano = 2022)
         self.fim = DataEHora(data = self.data2, horario = self.hora)
         self.evento = Evento(nome = 'Evento 3', inicio = self.inicio, fim = self.fim)
         with self.assertRaises(Exception):
             self.evento.validaDiasInicioEFim()
 
-    def testExcecaoDatasTarefa4(self):
+    def testExcecaoHorasInicioEFim(self):
         self.data2 = Data(dia = 8, mes = 2, ano = 2022)
         self.hora2 = Horario(horas = 19, minutos = 15)
         self.fim = DataEHora(data = self.data2, horario = self.hora2)
@@ -64,7 +64,7 @@ class TestesEvento(unittest.TestCase):
         with self.assertRaises(Exception):
             self.evento.validaHorasInicioEFim()
 
-    def testExcecaoDatasTarefa5(self):
+    def testExcecaoMinutosInicioEFim(self):
         self.data2 = Data(dia = 8, mes = 2, ano = 2022)
         self.hora2 = Horario(horas = 20, minutos = 00)
         self.fim = DataEHora(data = self.data2, horario = self.hora2)
